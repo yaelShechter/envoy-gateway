@@ -258,6 +258,31 @@ func TestClientTrafficPolicyTarget(t *testing.T) {
 				"spec.tls: Invalid value: \"object\": setting ciphers has no effect if the minimum possible TLS version is 1.3",
 			},
 		},
+		{
+			desc: "valid timeout",
+			mutate: func(btp *egv1a1.ClientTrafficPolicy) {
+				d := gwapiv1.Duration("3s")
+				ctp.Spec = egv1a1.ClientTrafficPolicySpec{
+					TargetRef: gwapiv1a2.PolicyTargetReferenceWithSectionName{
+						PolicyTargetReference: gwapiv1a2.PolicyTargetReference{
+							Group: gwapiv1a2.Group("gateway.networking.k8s.io"),
+							Kind:  gwapiv1a2.Kind("Gateway"),
+							Name:  gwapiv1a2.ObjectName("eg"),
+						},
+					},
+					Timeout: &egv1a1.Timeout{
+						TCP: &egv1a1.TCPTimeout{
+							ConnectTimeout: &d,
+						},
+						HTTP: &egv1a1.HTTPTimeout{
+							ConnectionIdleTimeout: &d,
+							MaxConnectionDuration: &d,
+						},
+					},
+				}
+			},
+			wantErrors: []string{},
+		},
 	}
 
 	for _, tc := range cases {

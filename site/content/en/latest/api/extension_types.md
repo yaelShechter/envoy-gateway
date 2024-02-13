@@ -298,6 +298,7 @@ _Appears in:_
 | `path` | _[PathSettings](#pathsettings)_ |  false  | Path enables managing how the incoming path set by clients can be normalized. |
 | `http1` | _[HTTP1Settings](#http1settings)_ |  false  | HTTP1 provides HTTP/1 configuration on the listener. |
 | `headers` | _[HeaderSettings](#headersettings)_ |  false  | HeaderSettings provides configuration for header management. |
+| `timeout` | _[Timeout](#timeout)_ |  false  | Timeout settings for the downstream connections. |
 
 
 
@@ -2302,6 +2303,7 @@ Timeout defines configuration for timeouts related to connections.
 
 _Appears in:_
 - [BackendTrafficPolicySpec](#backendtrafficpolicyspec)
+- [ClientTrafficPolicySpec](#clienttrafficpolicyspec)
 
 | Field | Type | Required | Description |
 | ---   | ---  | ---      | ---         |
